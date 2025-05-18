@@ -1,0 +1,40 @@
+{% extends 'face_app/base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 mx-auto text-center">
+        <h1>Face Recognition Attendance System</h1>
+        <p class="lead">Welcome to the automated attendance system</p>
+        
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Add Employee</h5>
+                        <p class="card-text">Register new employees with their photos</p>
+                        <a href="{% url 'add_employee' %}" class="btn btn-primary">Add Employee</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Mark Attendance</h5>
+                        <p class="card-text">Use face recognition to mark attendance</p>
+                        <a href="{% url 'attendance' %}" class="btn btn-success">Mark Attendance</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">View Records</h5>
+                        <p class="card-text">Check attendance records</p>
+                        <a href="{% url 'attendance_list' %}" class="btn btn-info">View Records</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

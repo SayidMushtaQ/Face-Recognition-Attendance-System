@@ -1,0 +1,51 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+env/
+venv/
+
+# Django migration files
+**/migrations/
+!*/migrations/__init__.py
+
+# SQLite database
+db.sqlite3
+
+# VS Code settings
+.vscode/
+
+# Environment variables
+.env
+
+# Mac system files
+.DS_Store
+
+# Pytest cache
+.pytest_cache/
+
+# Coverage reports
+htmlcov/
+.coverage
+coverage.xml
+*.cover
+
+# Logs
+*.log
+
+# Static and media files (if using collectstatic)
+staticfiles/
+media/
+
+# MyPy
+.mypy_cache/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Local IDE configs
+.idea/
+*.sublime-project
+*.sublime-workspace

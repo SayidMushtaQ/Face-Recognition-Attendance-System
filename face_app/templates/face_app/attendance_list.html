@@ -1,0 +1,36 @@
+{% extends 'face_app/base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-10 mx-auto">
+        <h2>Today's Attendance</h2>
+        
+        {% if today_attendance %}
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Employee Name</th>
+                        <th>Employee ID</th>
+                        <th>Check-in Time</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for attendance in today_attendance %}
+                    <tr>
+                        <td>{{ attendance.employee.name }}</td>
+                        <td>{{ attendance.employee.employee_id }}</td>
+                        <td>{{ attendance.check_in_time|time }}</td>
+                        <td>{{ attendance.date }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <div class="alert alert-info">No attendance records for today.</div>
+        {% endif %}
+        
+        <a href="{% url 'index' %}" class="btn btn-secondary">Back to Home</a>
+    </div>
+</div>
+{% endblock %}
