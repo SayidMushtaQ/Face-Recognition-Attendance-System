@@ -40,17 +40,26 @@ def add_employee(request):
         employee_id = request.POST['employee_id']
         photo = request.FILES['photo']
         
-        employee = Employee.objects.create(
-            name=name,
-            employee_id=employee_id,
-            photo=photo
-        )
+        # Check if employee_id already exists
+        if Employee.objects.filter(employee_id=employee_id).exists():
+            messages.error(request, f'Employee ID {employee_id} already exists! Please use a different ID.')
+            return render(request, 'face_app/add_employee.html')
         
-        # Reload known faces
-        load_known_faces()
-        
-        messages.success(request, f'Employee {name} added successfully!')
-        return redirect('index')
+        try:
+            employee = Employee.objects.create(
+                name=name,
+                employee_id=employee_id,
+                photo=photo
+            )
+            
+            # Reload known faces
+            load_known_faces()
+            
+            messages.success(request, f'Employee {name} added successfully!')
+            return redirect('index')
+        except Exception as e:
+            messages.error(request, f'Error adding employee: {str(e)}')
+            return render(request, 'face_app/add_employee.html')
     
     return render(request, 'face_app/add_employee.html')
 
@@ -80,7 +89,9 @@ class VideoCamera:
         
         # Resize frame for faster processing
         small_frame = cv2.resize(image, (0, 0), fx=0.25, fy=0.25)
-        rgb_small_frame = small_frame[:, :, ::-1]
+        
+        # Convert BGR to RGB and ensure correct data type
+        rgb_small_frame = cv2.cvtColor(small_frame, cv2.COLOR_BGR2RGB)
         
         # Find faces
         face_locations = face_recognition.face_locations(rgb_small_frame)
